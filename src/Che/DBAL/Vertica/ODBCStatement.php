@@ -135,7 +135,7 @@ class ODBCStatement implements \Iterator, Statement
     /**
      * {@inheritDoc}
      */
-    public function fetch($fetchMode = null)
+    public function fetch($fetchMode = null, $cursorOrientation = \PDO::FETCH_ORI_NEXT, $cursorOffset = 0)
     {
         $fetchMode = $fetchMode ?: $this->defaultFetchMode;
         $fetched = odbc_fetch_row($this->sth);
@@ -210,7 +210,7 @@ class ODBCStatement implements \Iterator, Statement
     /**
      * {@inheritDoc}
      */
-    public function fetchAll($fetchMode = null)
+    public function fetchAll($fetchMode = null, $fetchArgument = null, $ctorArgs = null)
     {
         $rows = [];
         while ($row = $this->fetch($fetchMode)) {
