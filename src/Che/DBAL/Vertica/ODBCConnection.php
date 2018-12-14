@@ -33,8 +33,7 @@ class ODBCConnection implements Connection
         $this->options = array_merge(self::$DEFAULT_OPTIONS, $options);
         $this->dbh = @odbc_connect($dsn, $user, $password);
         if (!$this->dbh) {
-            $error = error_get_last();
-            throw new ODBCException($error['message']);
+            throw new ODBCException(odbc_errormsg(), odbc_error());
         }
         
         if ( ! empty( $this->options["search_path"] ) ) {
